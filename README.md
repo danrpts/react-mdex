@@ -1,6 +1,6 @@
 # react-mdex
 
-> A markdown editor for React 
+> An ultralight React library for building Markdown editors.
 
 [![NPM](https://img.shields.io/npm/v/react-mdex.svg)](https://www.npmjs.com/package/react-mdex) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -13,15 +13,37 @@ npm install --save react-mdex
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import MarkdownIt from "markdown-it";
+import { Editor, EditorState, Preview } from "react-mdex";
 
-import MyComponent from 'react-mdex'
+class BasicEditor extends Component {
+  constructor(props) {
+    super(props);
 
-class Example extends Component {
-  render () {
+    this.state = {
+      editorState: EditorState.create()
+    };
+
+    this.onChange = editorState => {
+      this.setState({
+        editorState
+      });
+    };
+
+    const md = MarkdownIt();
+    this.renderFn = md.render.bind(md);
+  }
+  render() {
     return (
-      <MyComponent />
-    )
+      <div>
+        <Editor editorState={this.state.editorState} onChange={this.onChange} />
+        <Preview
+          editorState={this.state.editorState}
+          renderFn={this.renderFn}
+        />
+      </div>
+    );
   }
 }
 ```

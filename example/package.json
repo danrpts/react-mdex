@@ -5,11 +5,15 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "prop-types": "^15.6.2",
+    "@githubprimer/octicons-react": "^8.1.0",
+    "bootstrap": "^4.1.3",
+    "markdown-it": "^8.4.2",
+    "markdown-it-emoji": "^1.4.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-mdex": "file:..",
     "react-scripts": "^1.1.4",
-    "react-mdex": "file:.."
+    "reactstrap": "^6.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

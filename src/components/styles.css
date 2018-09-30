@@ -1,0 +1,24 @@
+.preview {
+  min-height: 200px;
+  padding: 0.375rem 0.75rem;
+}
+
+.preview img {
+  max-width: 100% !important;
+}
+
+.preview blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+}
+
+.editor {
+  min-height: 200px;
+  box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
+  background-color: #fafbfc !important;
+}
+
+.editor:focus {
+  background-color: #fff !important;
+}
