@@ -10,9 +10,6 @@ export default class Editor extends Component {
     this.ref = React.createRef();
 
     this.createStateAndPropogate = e => {
-      // NOTE:
-      // Create a new editorState object from the current DOM state.
-      // Then, pass it back to the parent component.
       const newEditorState = EditorState.create(
         e.target.value,
         e.target.selectionStart,
@@ -30,35 +27,13 @@ export default class Editor extends Component {
 
   componentDidUpdate() {
     // NOTE:
-    // Allows us to update the DOM selection from the parent state, and keep
-    // the textarea ref encapuslated in the editor child.
-    this.ref.current.setSelectionRange(
-      this.props.editorState.selection.start,
-      this.props.editorState.selection.end
-    );
-    // NOTE:
-    // focus will only be called when typing and selecting in the textarea, or
-    // clicking a button in the toolbar (via selection state change).
-    // shouldComponentUpdate will cancel a render caused by a state change in
-    // the parent that is unrelated to the editorState.
+    // 1) Allows us to set DOM selection state from the editorState prop.
+    // 2) Avoid setSelectionRange as this sets the selection direction to
+    //    "forward" by default, which prevents us from selecting with the
+    //    keyboard in reverse direction.
+    this.ref.current.selectionStart = this.props.editorState.selection.start;
+    this.ref.current.selectionEnd = this.props.editorState.selection.end;
     this.ref.current.focus();
-  }
-
-  shouldComponentUpdate(nextProps) {
-    // NOTE:
-    // Prevents a double render when:
-    // 1) typing in the textarea triggering change and select events
-    // 2) clicking in the toolbar triggering a state change and selection event
-    // 3) parent state changed that doesn't include editorState
-    if (
-      nextProps.editorState.selection.start ===
-        this.props.editorState.selection.start &&
-      nextProps.editorState.selection.end ===
-        this.props.editorState.selection.end
-    ) {
-      return false;
-    }
-    return true;
   }
 
   render() {
