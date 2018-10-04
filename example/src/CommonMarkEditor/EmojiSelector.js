@@ -30,7 +30,7 @@ export default class EmojiSelector extends Component {
     if (word.startsWith(":")) {
       word = word.slice(1);
       for (let name of this.emojiKeys) {
-        if (filtered.length > max) {
+        if (filtered.length >= max) {
           break;
         }
         if (
