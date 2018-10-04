@@ -22,6 +22,9 @@ export default class CommonMarkEditor extends Component {
   constructor(props) {
     super(props);
 
+    // we only need the ref in the parent so that the emoji selector can listen
+    this.editorRef = React.createRef();
+
     this.markdownIt = new MarkdownIt({
       breaks: true,
       typographer: true
@@ -106,18 +109,19 @@ export default class CommonMarkEditor extends Component {
         <CardBody className="p-2">
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
+              <Editor
+                innerRef={this.editorRef}
+                editorState={this.state.editorState}
+                onChange={this.updateEditorState}
+                handleKeyCommand={this.handleKeyCommand}
+                handleKeyColon={this.handleKeyColon}
+                className="form-control"
+              />
               <EmojiSelector
+                inputRef={this.editorRef}
                 editorState={this.state.editorState}
                 onClick={this.updateEditorState}
-              >
-                <Editor
-                  editorState={this.state.editorState}
-                  onChange={this.updateEditorState}
-                  handleKeyCommand={this.handleKeyCommand}
-                  handleKeyColon={this.handleKeyColon}
-                  className="form-control"
-                />
-              </EmojiSelector>
+              />
             </TabPane>
             <TabPane tabId="2">
               <Preview
