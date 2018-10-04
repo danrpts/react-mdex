@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EditorState from "../models/EditorState.js";
+import getCaretCoordinates from "textarea-caret";
 
 import styles from "./styles.css";
 
@@ -7,13 +8,31 @@ export default class Editor extends Component {
   constructor(props) {
     super(props);
 
-    this.ref = React.createRef();
+    this.ref = props.innerRef || React.createRef();
+
+    this.getCarotStateFromDOM = e => {
+      const { top, left, height } = getCaretCoordinates(
+        this.ref.current,
+        e.target.selectionEnd
+      );
+      const carotTop =
+        this.ref.current.offsetTop - this.ref.current.scrollTop + top;
+      const carotLeft =
+        this.ref.current.offsetLeft - this.ref.current.scrollLeft + left;
+      // NOTE:
+      // Carot position is relative to the closest relatively positioned parent
+      return [carotTop, carotLeft, height];
+    };
+
+    this.getSelectionStateFromDOM = e => {
+      return [e.target.selectionStart, e.target.selectionEnd];
+    };
 
     this.createStateAndPropogate = e => {
-      const newEditorState = EditorState.create(
+      const newEditorState = new EditorState(
         e.target.value,
-        e.target.selectionStart,
-        e.target.selectionEnd
+        ...this.getSelectionStateFromDOM(e),
+        ...this.getCarotStateFromDOM(e)
       );
       this.props.onChange(newEditorState);
     };
