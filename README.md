@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-mdex.svg)](https://www.npmjs.com/package/react-mdex) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+![commonmark_editor_screenshot.png](./example/commonmark_editor_screenshot.png)
+
 ## Install
 
 ```bash
