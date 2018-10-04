@@ -2,7 +2,29 @@
   background-color: #f6f8fa !important;
 }
 
-.radius-override {
+.tab-btn {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+}
+
+.emoji-selector-contianer {
+  position: relative !important;
+}
+
+.emoji-selector-dropdown {
+  position: absolute !important;
+}
+
+.emoji-selector-list-item.list-group-item:first-child {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.emoji-selector-list-item {
+  cursor: pointer !important;
+}
+
+.emoji-selector-list-item:hover {
+  color: #fff !important;
+  background-color: #007bff !important;
 }

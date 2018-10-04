@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Editor, EditorState, Preview } from "react-mdex";
 import Octicon from "./OcitconByName.js";
 import CommonMarkToolbar from "./CommonMarkToolbar.js";
+import EmojiSelector from "./EmojiSelector.js";
 import MarkdownIt from "markdown-it";
 import emoji from "markdown-it-emoji";
+import toolbarState from "./toolbarState.js";
+
 import {
   Card,
   CardHeader,
@@ -34,7 +37,7 @@ export default class CommonMarkEditor extends Component {
 
     this.state = {
       activeTab: "1",
-      editorState: EditorState.create()
+      editorState: new EditorState()
     };
 
     this.updateEditorState = editorState => {
@@ -68,7 +71,7 @@ export default class CommonMarkEditor extends Component {
           <Nav tabs>
             <NavItem className="ml-3">
               <NavLink
-                className="btn radius-override"
+                className="btn tab-btn"
                 active={this.state.activeTab === "1"}
                 onClick={() => {
                   this.onTabClick("1");
@@ -79,8 +82,8 @@ export default class CommonMarkEditor extends Component {
             </NavItem>
             <NavItem className="mr-auto">
               <NavLink
-                className="btn radius-override"
-                disabled={EditorState.isContentEmpty(this.state.editorState)}
+                className="btn tab-btn"
+                disabled={this.state.editorState.isContentEmpty()}
                 active={this.state.activeTab === "2"}
                 onClick={() => {
                   this.onTabClick("2");
@@ -103,12 +106,18 @@ export default class CommonMarkEditor extends Component {
         <CardBody className="p-2">
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
-              <Editor
+              <EmojiSelector
                 editorState={this.state.editorState}
-                onChange={this.updateEditorState}
-                handleKeyCommand={this.handleKeyCommand}
-                className="form-control"
-              />
+                onClick={this.updateEditorState}
+              >
+                <Editor
+                  editorState={this.state.editorState}
+                  onChange={this.updateEditorState}
+                  handleKeyCommand={this.handleKeyCommand}
+                  handleKeyColon={this.handleKeyColon}
+                  className="form-control"
+                />
+              </EmojiSelector>
             </TabPane>
             <TabPane tabId="2">
               <Preview
@@ -140,75 +149,3 @@ export default class CommonMarkEditor extends Component {
     );
   }
 }
-
-const toolbarState = [
-  {
-    title: "Add header text",
-    octiconName: "text-size",
-    handler: editorState => {
-      return EditorState.toggleInlineStyle(editorState, "### ", "");
-    }
-  },
-  {
-    hotkey: "b",
-    title: "Add bold text",
-    octiconName: "bold",
-    handler: editorState => {
-      return EditorState.toggleInlineStyle(editorState, "**", "**");
-    }
-  },
-  {
-    hotkey: "i",
-    title: "Add italic text",
-    octiconName: "italic",
-    handler: editorState => {
-      return EditorState.toggleInlineStyle(editorState, "_", "_");
-    }
-  },
-  {
-    title: "Insert quote",
-    octiconName: "quote",
-    handler: editorState => {
-      return EditorState.toggleMultilineStyle(editorState, "> ", "");
-    }
-  },
-  {
-    title: "Insert code",
-    octiconName: "code",
-    handler: editorState => {
-      if (EditorState.isSelectionMultiline(editorState)) {
-        return EditorState.toggleBlockStyle(editorState, "```", "```");
-      }
-      return EditorState.toggleInlineStyle(editorState, "`", "`");
-    }
-  },
-  {
-    hotkey: "k",
-    title: "Add a link",
-    octiconName: "link",
-    handler: editorState => {
-      return EditorState.toggleInlineStyle(editorState, "[", "](url)");
-    }
-  },
-  {
-    title: "Add an image",
-    octiconName: "file-media",
-    handler: editorState => {
-      return EditorState.toggleInlineStyle(editorState, "![", "](url)");
-    }
-  },
-  {
-    title: "Add a bulleted list",
-    octiconName: "list-unordered",
-    handler: editorState => {
-      return EditorState.toggleMultilineStyle(editorState, "- ", "");
-    }
-  },
-  {
-    title: "Add a numbered list",
-    octiconName: "list-ordered",
-    handler: editorState => {
-      return EditorState.toggleNumberedStyle(editorState);
-    }
-  }
-];
