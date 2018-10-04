@@ -22,7 +22,7 @@ class BasicEditor extends Component {
     super(props);
 
     this.state = {
-      editorState: EditorState.create()
+      editorState: new EditorState()
     };
 
     this.onChange = editorState => {
