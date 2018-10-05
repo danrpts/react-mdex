@@ -30,14 +30,15 @@ export default class EmojiSelector extends Component {
     };
 
     this.onKeydown = e => {
+      if (this.state.list.length === 0) {
+        return;
+      }
       switch (e.key) {
         case "Enter":
         case "Tab":
-          if (this.state.list.length > 0) {
-            this.replaceWordAndPropogate(
-              `:${this.state.list[this.state.select]}:`
-            )(e);
-          }
+          this.replaceWordAndPropogate(
+            `:${this.state.list[this.state.select]}:`
+          )(e);
           break;
         case "ArrowUp":
           e.preventDefault();
