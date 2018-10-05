@@ -42,7 +42,7 @@ export default class EmojiSelector extends Component {
           e.preventDefault();
           this.setState(state => {
             return {
-              select: clamp(state.select - 1, 0, MAX_LIST_LENGTH - 1)
+              select: clamp(state.select - 1, 0, this.state.list.length - 1)
             };
           });
           break;
@@ -50,7 +50,7 @@ export default class EmojiSelector extends Component {
           e.preventDefault();
           this.setState(state => {
             return {
-              select: clamp(state.select + 1, 0, MAX_LIST_LENGTH - 1)
+              select: clamp(state.select + 1, 0, this.state.list.length - 1)
             };
           });
           break;
@@ -82,7 +82,8 @@ export default class EmojiSelector extends Component {
     }
     this.setState({
       word,
-      list: filtered
+      list: filtered,
+      select: 0
     });
   }
 
