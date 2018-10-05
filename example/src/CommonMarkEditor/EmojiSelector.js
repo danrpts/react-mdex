@@ -13,7 +13,6 @@ export default class EmojiSelector extends Component {
     super(props);
 
     this.state = {
-      word: "",
       list: [],
       select: 0
     };
@@ -34,9 +33,11 @@ export default class EmojiSelector extends Component {
       switch (e.key) {
         case "Enter":
         case "Tab":
-          this.replaceWordAndPropogate(
-            `:${this.state.list[this.state.select]}:`
-          )(e);
+          if (this.state.list.length > 0) {
+            this.replaceWordAndPropogate(
+              `:${this.state.list[this.state.select]}:`
+            )(e);
+          }
           break;
         case "ArrowUp":
           e.preventDefault();
@@ -81,7 +82,6 @@ export default class EmojiSelector extends Component {
       }
     }
     this.setState({
-      word,
       list: filtered,
       select: 0
     });
