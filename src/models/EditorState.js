@@ -32,9 +32,7 @@ export default class EditorState {
         .substring(0, start)
         .split(/\s+/)
         .pop();
-
       let wordRight = this.content.substring(end).split(/\s+/)[0];
-
       word = wordLeft + wordRight;
       start -= wordLeft.length;
       end += wordRight.length;
@@ -53,15 +51,14 @@ export default class EditorState {
     text = "",
     start = 0,
     end = 0,
-    selectAfterInsert = true
+    selectAfterInsert = false
   ) {
     const content =
       editorState.content.substring(0, start) +
       text +
       editorState.content.substring(end);
     if (selectAfterInsert) {
-      start += text.length;
-      end += text.length;
+      end = start + text.length;
     } else {
       start = end = content.length;
     }
