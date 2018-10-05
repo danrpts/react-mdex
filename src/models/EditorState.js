@@ -23,14 +23,23 @@ export default class EditorState {
     return { word, start, end };
   }
 
-  // get the current selected word or the word ending at the carot
   getCurrentWord() {
     let { word, start, end } = this.getSelection();
-    word = this.content
-      .substring(0, end)
-      .split(/\s+/)
-      .pop();
-    start -= word.length;
+
+    // if there is no selection, grab the word under the cursor
+    if (start === end) {
+      let wordLeft = this.content
+        .substring(0, start)
+        .split(/\s+/)
+        .pop();
+
+      let wordRight = this.content.substring(end).split(/\s+/)[0];
+
+      word = wordLeft + wordRight;
+      start -= wordLeft.length;
+      end += wordRight.length;
+    }
+
     return { word, start, end };
   }
 
