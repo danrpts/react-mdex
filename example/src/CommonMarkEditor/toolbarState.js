@@ -46,14 +46,28 @@ export default [
     title: "Add a link",
     octiconName: "link",
     handler: editorState => {
-      return EditorState.toggleInlineStyle(editorState, "[", "](url)");
+      const newEditorState = EditorState.toggleInlineStyle(
+        editorState,
+        "[",
+        "](url)"
+      );
+      newEditorState.selection.start = newEditorState.selection.end + 2;
+      newEditorState.selection.end += 5;
+      return newEditorState;
     }
   },
   {
     title: "Add an image",
     octiconName: "file-media",
     handler: editorState => {
-      return EditorState.toggleInlineStyle(editorState, "![", "](url)");
+      const newEditorState = EditorState.toggleInlineStyle(
+        editorState,
+        "![",
+        "](url)"
+      );
+      newEditorState.selection.start = newEditorState.selection.end + 2;
+      newEditorState.selection.end += 5;
+      return newEditorState;
     }
   },
   {
