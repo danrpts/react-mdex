@@ -10,7 +10,7 @@ export default class App extends Component {
       <Container className="my-5">
         <Row className="justify-content-center">
           <Col sm="12" md="10" lg="8">
-            <div className="text-center">
+            <div className="text-center mb-5">
               <h1 className="display-4">MDEx</h1>
               <p className="lead">
                 An ultralight React library for building Markdown editors.
