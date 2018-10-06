@@ -102,8 +102,8 @@ export default class EmojiSelector extends Component {
 
   render() {
     const top =
-      this.props.editorState.carot.top + this.props.editorState.carot.height;
-    const left = this.props.editorState.carot.left;
+      this.props.editorState.caret.top + this.props.editorState.caret.height;
+    const left = this.props.editorState.caret.left;
     return (
       <div
         className={`emoji-selector ${this.props.className || ""}`}

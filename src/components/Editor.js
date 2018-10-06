@@ -10,18 +10,18 @@ export default class Editor extends Component {
 
     this.ref = props.innerRef || React.createRef();
 
-    this.getCarotStateFromDOM = e => {
+    this.getCaretStateFromDOM = e => {
       const { top, left, height } = getCaretCoordinates(
         this.ref.current,
         e.target.selectionEnd
       );
-      const carotTop =
+      const caretTop =
         this.ref.current.offsetTop - this.ref.current.scrollTop + top;
-      const carotLeft =
+      const caretLeft =
         this.ref.current.offsetLeft - this.ref.current.scrollLeft + left;
       // NOTE:
-      // Carot position is relative to the closest relatively positioned parent
-      return [carotTop, carotLeft, height];
+      // Caret position is relative to the closest relatively positioned parent
+      return [caretTop, caretLeft, height];
     };
 
     this.getSelectionStateFromDOM = e => {
@@ -32,7 +32,7 @@ export default class Editor extends Component {
       const newEditorState = new EditorState(
         e.target.value,
         ...this.getSelectionStateFromDOM(e),
-        ...this.getCarotStateFromDOM(e)
+        ...this.getCaretStateFromDOM(e)
       );
       this.props.onChange(newEditorState);
     };

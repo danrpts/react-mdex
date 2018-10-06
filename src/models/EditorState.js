@@ -4,13 +4,13 @@ export default class EditorState {
     content = "",
     selectionStart = 0,
     selectionEnd = 0,
-    carotTop = 0,
-    carotLeft = 0,
-    carotHeight = 24
+    caretTop = 0,
+    caretLeft = 0,
+    caretHeight = 24
   ) {
     this.content = content;
     this.selection = { start: selectionStart, end: selectionEnd };
-    this.carot = { top: carotTop, left: carotLeft, height: carotHeight };
+    this.caret = { top: caretTop, left: caretLeft, height: caretHeight };
   }
 
   isContentEmpty() {
