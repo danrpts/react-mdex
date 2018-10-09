@@ -41,9 +41,7 @@ export default class App extends Component {
                 </span>
               </p>
             </div>
-            <CommonMarkEditor>
-              <h1>Hello World</h1>
-            </CommonMarkEditor>
+            <CommonMarkEditor />
           </Col>
         </Row>
       </Container>

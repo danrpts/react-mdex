@@ -114,7 +114,6 @@ export default class CommonMarkEditor extends Component {
                 editorState={this.state.editorState}
                 onChange={this.updateEditorState}
                 handleKeyCommand={this.handleKeyCommand}
-                handleKeyColon={this.handleKeyColon}
                 className="form-control"
               />
               <EmojiSelector
