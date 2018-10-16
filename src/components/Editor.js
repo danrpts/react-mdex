@@ -1,28 +1,13 @@
 import React, { Component } from "react";
 import EditorState from "../models/EditorState.js";
-import getCaretCoordinates from "textarea-caret";
 
 import styles from "./styles.css";
 
-export default class Editor extends Component {
+class Editor extends Component {
   constructor(props) {
     super(props);
 
-    this.ref = props.innerRef || React.createRef();
-
-    this.getCaretStateFromDOM = e => {
-      const { top, left, height } = getCaretCoordinates(
-        this.ref.current,
-        e.target.selectionEnd
-      );
-      const caretTop =
-        this.ref.current.offsetTop - this.ref.current.scrollTop + top;
-      const caretLeft =
-        this.ref.current.offsetLeft - this.ref.current.scrollLeft + left;
-      // NOTE:
-      // Caret position is relative to the closest relatively positioned parent
-      return [caretTop, caretLeft, height];
-    };
+    this.ref = props.forwardRef || React.createRef();
 
     this.getSelectionStateFromDOM = e => {
       return [e.target.selectionStart, e.target.selectionEnd];
@@ -31,8 +16,7 @@ export default class Editor extends Component {
     this.createStateAndPropogate = e => {
       const newEditorState = new EditorState(
         e.target.value,
-        ...this.getSelectionStateFromDOM(e),
-        ...this.getCaretStateFromDOM(e)
+        ...this.getSelectionStateFromDOM(e)
       );
       this.props.onChange(newEditorState);
     };
@@ -42,6 +26,11 @@ export default class Editor extends Component {
         this.props.handleKeyCommand(e.key, e);
       }
     };
+  }
+
+  componentDidMount() {
+    this.ref.current.selectionStart = this.props.editorState.selection.start;
+    this.ref.current.selectionEnd = this.props.editorState.selection.end;
   }
 
   componentDidUpdate() {
@@ -69,3 +58,7 @@ export default class Editor extends Component {
     );
   }
 }
+
+export default React.forwardRef((props, ref) => {
+  return <Editor {...props} forwardRef={ref} />;
+});

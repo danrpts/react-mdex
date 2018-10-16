@@ -1,6 +1,6 @@
 # react-mdex
 
-> An ultralight React library for building Markdown editors - [Try it out!](https://superdan.io/react-mdex/)
+> An ultralight library for building Markdown editors in React - [Try it out!](https://superdan.io/react-mdex/)
 
 [![NPM](https://img.shields.io/npm/v/react-mdex.svg)](https://www.npmjs.com/package/react-mdex) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 

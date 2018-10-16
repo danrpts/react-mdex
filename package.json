@@ -1,7 +1,7 @@
 {
   "name": "react-mdex",
   "version": "1.0.0",
-  "description": "An ultralight React library for building Markdown editors.",
+  "description": "An ultralight library for building Markdown editors in React.",
   "author": "danrpts",
   "license": "MIT",
   "repository": "danrpts/react-mdex",
@@ -20,9 +20,6 @@
     "prepare": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
-  },
-  "dependencies": {
-    "textarea-caret": "^3.1.0"
   },
   "peerDependencies": {
     "react": "^16.4.1",

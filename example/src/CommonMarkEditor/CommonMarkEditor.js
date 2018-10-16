@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Editor, EditorState, Preview } from "react-mdex";
 import Octicon from "./OcitconByName.js";
 import CommonMarkToolbar from "./CommonMarkToolbar.js";
-import EmojiSelector from "./EmojiSelector.js";
+import EmojiList from "./EmojiList.js";
 import MarkdownIt from "markdown-it";
 import emoji from "markdown-it-emoji";
 import toolbarState from "./toolbarState.js";
+import { WithCursorDropdown, CursorDropdown } from "react-cursor-dropdown";
 
 import {
   Card,
@@ -18,12 +19,14 @@ import {
   NavLink
 } from "reactstrap";
 
+const EditorWithCursorDropdown = WithCursorDropdown(Editor);
+
 export default class CommonMarkEditor extends Component {
   constructor(props) {
     super(props);
 
     // we only need the ref in the parent so that the emoji selector can listen
-    this.editorRef = React.createRef();
+    this.inputRef = React.createRef();
 
     this.markdownIt = new MarkdownIt({
       breaks: true,
@@ -58,6 +61,15 @@ export default class CommonMarkEditor extends Component {
           this.updateEditorState(newState);
         }, 0);
       }
+    };
+
+    this.handleDropdownChange = ({ value, cursor }) => {
+      const { start, end } = cursor;
+      const content =
+        this.state.editorState.content.substring(0, start) +
+        value +
+        this.state.editorState.content.substring(end);
+      this.updateEditorState(new EditorState(content, content.length));
     };
 
     this.onTabClick = tab => {
@@ -109,18 +121,19 @@ export default class CommonMarkEditor extends Component {
         <CardBody className="p-2">
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
-              <Editor
-                innerRef={this.editorRef}
+              <EditorWithCursorDropdown
+                ref={this.inputRef}
                 editorState={this.state.editorState}
                 onChange={this.updateEditorState}
                 handleKeyCommand={this.handleKeyCommand}
+                onDropdownChange={this.handleDropdownChange}
                 className="form-control"
-              />
-              <EmojiSelector
-                inputRef={this.editorRef}
-                editorState={this.state.editorState}
-                onClick={this.updateEditorState}
-              />
+              >
+                <CursorDropdown
+                  pattern={/^:([\w+-]*)$/}
+                  component={EmojiList}
+                />
+              </EditorWithCursorDropdown>
             </TabPane>
             <TabPane tabId="2">
               <Preview

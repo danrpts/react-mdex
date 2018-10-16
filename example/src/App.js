@@ -11,12 +11,9 @@ export default class App extends Component {
         <Row className="justify-content-center">
           <Col sm="12" md="10" lg="8">
             <div className="text-center mb-5">
-              <h1 className="display-4">MDEx</h1>
+              <h1 className="display-4">react-mdex</h1>
               <p className="lead">
-                An ultralight React library for building Markdown editors.
-              </p>
-              <p>
-                <a href="https://github.com/danrpts/react-mdex">react-mdex</a>
+                An ultralight library for building Markdown editors in React.
               </p>
               <p>
                 <a

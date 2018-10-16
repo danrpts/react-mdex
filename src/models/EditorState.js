@@ -1,16 +1,8 @@
 export default class EditorState {
   // TODO: use immutable.js
-  constructor(
-    content = "",
-    selectionStart = 0,
-    selectionEnd = 0,
-    caretTop = 0,
-    caretLeft = 0,
-    caretHeight = 24
-  ) {
+  constructor(content = "", selectionStart = 0, selectionEnd = selectionStart) {
     this.content = content;
     this.selection = { start: selectionStart, end: selectionEnd };
-    this.caret = { top: caretTop, left: caretLeft, height: caretHeight };
   }
 
   isContentEmpty() {
@@ -20,24 +12,6 @@ export default class EditorState {
   getSelection() {
     const { start, end } = this.selection;
     const word = this.content.substring(start, end);
-    return { word, start, end };
-  }
-
-  getCurrentWord() {
-    let { word, start, end } = this.getSelection();
-
-    // if there is no selection, grab the word under the cursor
-    if (start === end) {
-      let wordLeft = this.content
-        .substring(0, start)
-        .split(/\s+/)
-        .pop();
-      let wordRight = this.content.substring(end).split(/\s+/)[0];
-      word = wordLeft + wordRight;
-      start -= wordLeft.length;
-      end += wordRight.length;
-    }
-
     return { word, start, end };
   }
 

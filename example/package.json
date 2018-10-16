@@ -7,9 +7,12 @@
   "dependencies": {
     "@githubprimer/octicons-react": "^8.1.0",
     "bootstrap": "^4.1.3",
+    "gemoji": "^4.2.1",
     "markdown-it": "^8.4.2",
     "markdown-it-emoji": "^1.4.0",
+    "memoize-one": "^4.0.2",
     "react": "^16.4.1",
+    "react-cursor-dropdown": "^1.1.0",
     "react-dom": "^16.4.1",
     "react-mdex": "file:..",
     "react-scripts": "^1.1.4",
