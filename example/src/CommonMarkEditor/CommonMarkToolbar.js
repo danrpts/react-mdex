@@ -3,7 +3,7 @@ import Octicon from "./OcitconByName.js";
 import { Button, ButtonGroup, UncontrolledTooltip } from "reactstrap";
 
 export default function CommonMarkToolbar(props) {
-  const createStateAndPropogate = handler => e => {
+  const handleClick = handler => e => {
     e.preventDefault();
     const newEditorState = handler(props.editorState);
     props.onClick(newEditorState);
@@ -18,7 +18,7 @@ export default function CommonMarkToolbar(props) {
             id={id}
             color="link"
             className="text-muted"
-            onClick={createStateAndPropogate(tool.handler)}
+            onClick={handleClick(tool.handler)}
           >
             <Octicon
               name={tool.octiconName}
