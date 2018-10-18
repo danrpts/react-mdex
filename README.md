@@ -39,10 +39,10 @@ class BasicEditor extends Component {
   render() {
     return (
       <div>
-        <Editor editorState={this.state.editorState} onChange={this.onChange} />
+        <Editor editorState={this.state.editorState} onEditorStateChange={this.onChange} />
         <Preview
           editorState={this.state.editorState}
-          renderFn={this.renderFn}
+          markdownRenderFn={this.renderFn}
         />
       </div>
     );
