@@ -1,32 +1,37 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import EditorState from "../models/EditorState.js";
 
 import styles from "./styles.css";
 
 class Editor extends Component {
+  static propTypes = {
+    editorState: PropTypes.instanceOf(EditorState).isRequired,
+    onEditorStateChange: PropTypes.func.isRequired,
+    onCommandKeyDown: PropTypes.func
+  };
+
   constructor(props) {
     super(props);
-
     this.ref = props.forwardRef || React.createRef();
-
-    this.getSelectionStateFromDOM = e => {
-      return [e.target.selectionStart, e.target.selectionEnd];
-    };
-
-    this.createStateAndPropogate = e => {
-      const newEditorState = new EditorState(
-        e.target.value,
-        ...this.getSelectionStateFromDOM(e)
-      );
-      this.props.onChange(newEditorState);
-    };
-
-    this.propogateKeyDown = e => {
-      if (e.ctrlKey || e.metaKey) {
-        this.props.handleKeyCommand(e.key, e);
-      }
-    };
+    this.handleEditorStateChange = this.handleEditorStateChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
+
+  handleEditorStateChange = e => {
+    const newEditorState = new EditorState(
+      e.target.value,
+      e.target.selectionStart,
+      e.target.selectionEnd
+    );
+    this.props.onEditorStateChange(newEditorState);
+  };
+
+  handleKeyDown = e => {
+    if ((e.ctrlKey || e.metaKey) && this.props.onCommandKeyDown) {
+      this.props.onCommandKeyDown(e);
+    }
+  };
 
   componentDidMount() {
     this.ref.current.selectionStart = this.props.editorState.selection.start;
@@ -50,9 +55,10 @@ class Editor extends Component {
         ref={this.ref}
         placeholder={this.props.placeholder}
         value={this.props.editorState.content}
-        onChange={this.createStateAndPropogate}
-        onSelect={this.createStateAndPropogate}
-        onKeyDown={this.propogateKeyDown}
+        onChange={this.handleEditorStateChange}
+        onSelect={this.handleEditorStateChange}
+        onKeyDown={this.handleKeyDown}
+        style={this.props.style}
         className={`${styles.editor} ${this.props.className}`}
       />
     );

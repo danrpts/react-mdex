@@ -22,6 +22,7 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4"
