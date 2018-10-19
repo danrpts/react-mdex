@@ -70,7 +70,7 @@ export default class CommonMarkEditor extends Component {
     }
   };
 
-  handleDropdownChange = ({ value, cursor }) => {
+  handleCursorDropdownChange = ({ value, cursor }) => {
     const { start, end } = cursor;
     const content =
       this.state.editorState.content.substring(0, start) +
@@ -138,7 +138,7 @@ export default class CommonMarkEditor extends Component {
                 editorState={this.state.editorState}
                 onEditorStateChange={this.handleEditorStateChange}
                 onCommandKeyDown={this.handleCommandKeyDown}
-                onDropdownChange={this.handleDropdownChange}
+                onCursorDropdownChange={this.handleCursorDropdownChange}
                 className="form-control"
               >
                 <CursorDropdown
