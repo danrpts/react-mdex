@@ -39,9 +39,8 @@ export default class EmojiList extends Component {
         break;
       case "Enter":
       case "Tab":
-        const id = this.filtered[this.state.option];
-        const { emoji } = gemoji.name[id];
-        this.props.onChange(`${emoji} `);
+        const { char } = this.filtered[this.state.option];
+        this.props.onChange(`${char} `);
         break;
       case "ArrowUp":
         e.preventDefault();
@@ -76,10 +75,11 @@ export default class EmojiList extends Component {
 
   render() {
     this.filtered = filter(this.props.filterText);
+    console.log(this.filtered);
     return (
       <ListGroup role="listbox" hidden={this.state.isHidden}>
-        {this.filtered.map((key, i) => {
-          const { name, emoji } = gemoji.name[key];
+        {this.filtered.map((emoji, i) => {
+          const { name, char } = emoji;
           const isActive = i === this.state.option;
           return (
             <ListGroupItem
@@ -87,12 +87,12 @@ export default class EmojiList extends Component {
               active={isActive}
               aria-selected={isActive}
               key={name}
-              value={emoji}
+              value={char}
               tag="button"
               action
               onClick={this.handleClick}
             >
-              {emoji} {name}
+              {char} {name}
             </ListGroupItem>
           );
         })}
@@ -109,15 +109,15 @@ const clamp = (value, min, max) => {
 // Helper to filter emojis and memoize the result
 const filter = memoize((filterText = "") => {
   let filtered = [];
-  for (let emojiName of emojiNames) {
+  for (let name of emojiNames) {
     if (filtered.length >= MAX_FILTERED_LIST_LENGTH) {
       break;
     }
     if (
-      emojiName.startsWith(filterText) ||
-      gemoji.name[emojiName].tags.some(tag => tag.startsWith(filterText))
+      name.startsWith(filterText) ||
+      gemoji.name[name].tags.some(tag => tag.startsWith(filterText))
     ) {
-      filtered.push(emojiName);
+      filtered.push({ name, char: gemoji.name[name].emoji });
     }
   }
   return filtered;

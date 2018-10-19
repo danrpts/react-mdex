@@ -32,7 +32,9 @@ export default class CommonMarkEditor extends Component {
 
     this.handleEditorStateChange = this.handleEditorStateChange.bind(this);
     this.handleCommandKeyDown = this.handleCommandKeyDown.bind(this);
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.handleCursorDropdownChange = this.handleCursorDropdownChange.bind(
+      this
+    );
     this.handleTabClick = this.handleTabClick.bind(this);
     this.handleEditorTabClick = this.handleEditorTabClick.bind(this);
     this.handlePreviewTabClick = this.handlePreviewTabClick.bind(this);
