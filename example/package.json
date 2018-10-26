@@ -1,7 +1,7 @@
 {
   "name": "react-mdex-example",
   "homepage": "https://danrpts.github.io/react-mdex",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "private": true,
   "dependencies": {

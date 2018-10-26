@@ -1,6 +1,6 @@
 {
   "name": "react-mdex",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An ultralight library for building Markdown editors in React.",
   "author": "danrpts",
   "license": "MIT",

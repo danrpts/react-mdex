@@ -141,7 +141,7 @@ export default class CommonMarkEditor extends Component {
                 onEditorStateChange={this.handleEditorStateChange}
                 onCommandKeyDown={this.handleCommandKeyDown}
                 onCursorDropdownChange={this.handleCursorDropdownChange}
-                className="form-control"
+                className="editor form-control"
               >
                 <CursorDropdown
                   pattern={/^:([\w+-]*)$/}
@@ -153,7 +153,7 @@ export default class CommonMarkEditor extends Component {
               <Preview
                 editorState={this.state.editorState}
                 markdownRenderFn={this.markdownRenderFn}
-                className="border-bottom"
+                className="preview border-bottom"
               />
             </TabPane>
           </TabContent>

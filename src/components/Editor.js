@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import EditorState from "../models/EditorState.js";
 
-import styles from "./styles.css";
-
 class Editor extends Component {
   static propTypes = {
     editorState: PropTypes.instanceOf(EditorState).isRequired,
@@ -59,7 +57,7 @@ class Editor extends Component {
         onSelect={this.handleEditorStateChange}
         onKeyDown={this.handleKeyDown}
         style={this.props.style}
-        className={`${styles.editor} ${this.props.className}`}
+        className={this.props.className}
       />
     );
   }
