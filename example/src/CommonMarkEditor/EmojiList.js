@@ -76,7 +76,6 @@ export default class EmojiList extends Component {
 
   render() {
     this.filtered = filter(this.props.filterText);
-    console.log(this.filtered);
     return (
       <ListGroup role="listbox" hidden={this.state.isHidden}>
         {this.filtered.map((emoji, i) => {
