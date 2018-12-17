@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import memoize from "memoize-one";
-import gemoji from "gemoji";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import React, { Component } from "react";
+import gemoji from "gemoji";
+import memoize from "memoize-one";
 
 const emojiNames = Object.keys(gemoji.name);
 const MAX_FILTERED_LIST_LENGTH = 5;

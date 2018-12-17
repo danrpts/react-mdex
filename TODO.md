@@ -1,0 +1,2 @@
+- [ ] Generate documentation from component prop types
+- [ ] Document EditorState API
