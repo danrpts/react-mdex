@@ -1,6 +1,15 @@
 {
-  "main.css": "static/css/main.d61e0812.css",
-  "main.css.map": "static/css/main.d61e0812.css.map",
-  "main.js": "static/js/main.97e61dab.js",
-  "main.js.map": "static/js/main.97e61dab.js.map"
+  "main.css": "/react-mdex/static/css/main.295b315a.chunk.css",
+  "main.js": "/react-mdex/static/js/main.0ab0093d.chunk.js",
+  "main.js.map": "/react-mdex/static/js/main.0ab0093d.chunk.js.map",
+  "static/css/1.76c47d8b.chunk.css": "/react-mdex/static/css/1.76c47d8b.chunk.css",
+  "static/js/1.f0480997.chunk.js": "/react-mdex/static/js/1.f0480997.chunk.js",
+  "static/js/1.f0480997.chunk.js.map": "/react-mdex/static/js/1.f0480997.chunk.js.map",
+  "runtime~main.js": "/react-mdex/static/js/runtime~main.46443e1a.js",
+  "runtime~main.js.map": "/react-mdex/static/js/runtime~main.46443e1a.js.map",
+  "static/css/1.76c47d8b.chunk.css.map": "/react-mdex/static/css/1.76c47d8b.chunk.css.map",
+  "static/css/main.295b315a.chunk.css.map": "/react-mdex/static/css/main.295b315a.chunk.css.map",
+  "index.html": "/react-mdex/index.html",
+  "precache-manifest.d98329120ace66e3d2cab6ea399be197.js": "/react-mdex/precache-manifest.d98329120ace66e3d2cab6ea399be197.js",
+  "service-worker.js": "/react-mdex/service-worker.js"
 }
