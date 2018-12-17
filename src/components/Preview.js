@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import EditorState from "../models/EditorState.js";
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import EditorState from '../models/EditorState.js'
 
 export default function Preview(props) {
   return (
@@ -11,10 +12,10 @@ export default function Preview(props) {
         __html: props.markdownRenderFn(props.editorState.content)
       }}
     />
-  );
+  )
 }
 
 Preview.propTypes = {
   editorState: PropTypes.instanceOf(EditorState).isRequired,
   markdownRenderFn: PropTypes.func.isRequired
-};
+}
