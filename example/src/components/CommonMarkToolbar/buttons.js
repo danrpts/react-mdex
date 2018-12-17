@@ -1,9 +1,9 @@
 import { EditorState } from "react-mdex";
 
-export default [
+const buttons = [
   {
     title: "Add header text",
-    octiconName: "text-size",
+    octicon: "text-size",
     handler: editorState => {
       return EditorState.toggleInlineStyle(editorState, "### ", "");
     }
@@ -11,7 +11,7 @@ export default [
   {
     hotkey: "b",
     title: "Add bold text",
-    octiconName: "bold",
+    octicon: "bold",
     handler: editorState => {
       return EditorState.toggleInlineStyle(editorState, "**", "**");
     }
@@ -19,21 +19,21 @@ export default [
   {
     hotkey: "i",
     title: "Add italic text",
-    octiconName: "italic",
+    octicon: "italic",
     handler: editorState => {
       return EditorState.toggleInlineStyle(editorState, "_", "_");
     }
   },
   {
     title: "Insert quote",
-    octiconName: "quote",
+    octicon: "quote",
     handler: editorState => {
       return EditorState.toggleMultilineStyle(editorState, "> ", "");
     }
   },
   {
     title: "Insert code",
-    octiconName: "code",
+    octicon: "code",
     handler: editorState => {
       if (editorState.isSelectionMultiline()) {
         return EditorState.toggleBlockStyle(editorState, "```", "```");
@@ -44,7 +44,7 @@ export default [
   {
     hotkey: "k",
     title: "Add a link",
-    octiconName: "link",
+    octicon: "link",
     handler: editorState => {
       const newEditorState = EditorState.toggleInlineStyle(
         editorState,
@@ -58,7 +58,7 @@ export default [
   },
   {
     title: "Add an image",
-    octiconName: "file-media",
+    octicon: "file-media",
     handler: editorState => {
       const newEditorState = EditorState.toggleInlineStyle(
         editorState,
@@ -72,16 +72,18 @@ export default [
   },
   {
     title: "Add a bulleted list",
-    octiconName: "list-unordered",
+    octicon: "list-unordered",
     handler: editorState => {
       return EditorState.toggleMultilineStyle(editorState, "- ", "");
     }
   },
   {
     title: "Add a numbered list",
-    octiconName: "list-ordered",
+    octicon: "list-ordered",
     handler: editorState => {
       return EditorState.toggleNumberedStyle(editorState);
     }
   }
 ];
+
+export default buttons;

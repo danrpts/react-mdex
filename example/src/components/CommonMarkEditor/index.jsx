@@ -1,12 +1,3 @@
-import React, { Component } from "react";
-import { Editor, EditorState, Preview } from "react-mdex";
-import { WithCursorDropdown, CursorDropdown } from "react-cursor-dropdown";
-import Octicon from "./OcitconByName.js";
-import CommonMarkToolbar from "./CommonMarkToolbar.js";
-import toolbarState from "./toolbarState.js";
-import EmojiList from "./EmojiList.js";
-import MarkdownIt from "markdown-it";
-import emoji from "markdown-it-emoji";
 import {
   Card,
   CardHeader,
@@ -17,27 +8,28 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import { Editor, EditorState, Preview } from "react-mdex";
+import { WithCursorDropdown, CursorDropdown } from "react-cursor-dropdown";
+import MarkdownIt from "markdown-it";
+import React, { Component } from "react";
+import emoji from "markdown-it-emoji";
+
+import CommonMarkToolbar from "../CommonMarkToolbar";
+import EmojiList from "../EmojiList";
+import Octicon from "../Octicon";
+import commonMarkToolbarButtons from "../CommonMarkToolbar/buttons";
 
 const EditorWithCursorDropdown = WithCursorDropdown(Editor);
 
 const hotkeyMap = new Map(
-  toolbarState
-    .filter(tool => tool.hotkey)
-    .map(tool => [tool.hotkey, tool.handler])
+  commonMarkToolbarButtons
+    .filter(button => button.hotkey)
+    .map(button => [button.hotkey, button.handler])
 );
 
-export default class CommonMarkEditor extends Component {
+class CommonMarkEditor extends Component {
   constructor(props) {
     super(props);
-
-    this.handleEditorStateChange = this.handleEditorStateChange.bind(this);
-    this.handleCommandKeyDown = this.handleCommandKeyDown.bind(this);
-    this.handleCursorDropdownChange = this.handleCursorDropdownChange.bind(
-      this
-    );
-    this.handleTabClick = this.handleTabClick.bind(this);
-    this.handleEditorTabClick = this.handleEditorTabClick.bind(this);
-    this.handlePreviewTabClick = this.handlePreviewTabClick.bind(this);
 
     this.markdownIt = new MarkdownIt({
       breaks: true,
@@ -45,6 +37,10 @@ export default class CommonMarkEditor extends Component {
     });
     this.markdownIt.use(emoji);
     this.markdownRenderFn = this.markdownIt.render.bind(this.markdownIt);
+
+    // this is only so we can focus when the editor tab is clicked as
+    // reactstrap doesn't unmount the tabbed component, it just hides it
+    this.editorRef = React.createRef();
 
     this.state = {
       activeTab: "editor",
@@ -84,14 +80,16 @@ export default class CommonMarkEditor extends Component {
     });
   };
 
-  handleTabClick = tab => {
+  handleTabClick = (tab, cb = () => {}) => {
     if (this.state.activeTab !== tab) {
-      this.setState({ activeTab: tab });
+      this.setState({ activeTab: tab }, cb);
     }
   };
 
   handleEditorTabClick = e => {
-    this.handleTabClick("editor");
+    this.handleTabClick("editor", () => {
+      this.editorRef.current.focus();
+    });
   };
 
   handlePreviewTabClick = e => {
@@ -125,7 +123,7 @@ export default class CommonMarkEditor extends Component {
             <NavItem className="order-first order-md-last mx-3">
               <CommonMarkToolbar
                 className="flex-wrap"
-                toolbarState={toolbarState}
+                buttons={commonMarkToolbarButtons}
                 editorState={this.state.editorState}
                 onClick={this.handleEditorStateChange}
               />
@@ -137,6 +135,8 @@ export default class CommonMarkEditor extends Component {
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="editor">
               <EditorWithCursorDropdown
+                autofocus
+                ref={this.editorRef}
                 editorState={this.state.editorState}
                 onEditorStateChange={this.handleEditorStateChange}
                 onCommandKeyDown={this.handleCommandKeyDown}
@@ -179,3 +179,5 @@ export default class CommonMarkEditor extends Component {
     );
   }
 }
+
+export default CommonMarkEditor;

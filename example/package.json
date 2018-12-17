@@ -8,14 +8,16 @@
     "@githubprimer/octicons-react": "^8.1.0",
     "bootstrap": "^4.1.3",
     "gemoji": "^4.2.1",
+    "jquery": "^3.3.1",
     "markdown-it": "^8.4.2",
     "markdown-it-emoji": "^1.4.0",
     "memoize-one": "^4.0.2",
-    "react": "^16.4.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
     "react-cursor-dropdown": "^1.1.2",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.6.3",
     "react-mdex": "file:..",
-    "react-scripts": "^1.1.4",
+    "react-scripts": "^2.1.1",
     "reactstrap": "^6.4.0"
   },
   "scripts": {
@@ -23,5 +25,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -1,39 +1,42 @@
-import React from "react";
-import Octicon from "./OcitconByName.js";
 import { Button, ButtonGroup, UncontrolledTooltip } from "reactstrap";
+import { EditorState } from "react-mdex";
+import PropTypes from "prop-types";
+import React from "react";
 
-export default function CommonMarkToolbar(props) {
+import Octicon from "../Octicon";
+
+const CommonMarkToolbar = props => {
   const handleClick = handler => e => {
     e.preventDefault();
     const newEditorState = handler(props.editorState);
     props.onClick(newEditorState);
   };
+
   return (
     <ButtonGroup className={props.className}>
-      {props.toolbarState.map((tool, i) => {
-        const id = tool.octiconName + i;
+      {props.buttons.map(button => {
         return (
           <Button
-            key={id}
-            id={id}
+            key={button.octicon}
+            id={button.octicon}
             color="link"
             className="text-muted"
-            onClick={handleClick(tool.handler)}
+            onClick={handleClick(button.handler)}
           >
             <Octicon
-              name={tool.octiconName}
+              name={button.octicon}
               size="small"
               verticalAlign="middle"
-              ariaLabel={tool.title}
+              ariaLabel={button.title}
             />
             <UncontrolledTooltip
               placement="top"
-              target={id}
+              target={button.octicon}
               delay={{ hide: 0 }}
             >
               <small>
-                {tool.title}
-                {tool.hotkey ? ` <cmd-${tool.hotkey}>` : ""}
+                {button.title}
+                {button.hotkey ? ` <cmd-${button.hotkey}>` : ""}
               </small>
             </UncontrolledTooltip>
           </Button>
@@ -41,4 +44,11 @@ export default function CommonMarkToolbar(props) {
       })}
     </ButtonGroup>
   );
-}
+};
+
+CommonMarkToolbar.propTypes = {
+  editorState: PropTypes.instanceOf(EditorState).isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
+export default CommonMarkToolbar;
